@@ -11,7 +11,6 @@ import org.apache.pdfbox.rendering.PDFRenderer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.apache.pdfbox.Loader;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -83,7 +82,7 @@ public class OcrService {
             file.transferTo(tempFile);
             StringBuilder allText = new StringBuilder();
 
-            try (PDDocument document = Loader.loadPDF(tempFile)) {
+            try (PDDocument document = PDDocument.load(tempFile)) {
                 PDFRenderer renderer = new PDFRenderer(document);
                 Tesseract tesseract = createTesseract();
 
